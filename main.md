@@ -1156,7 +1156,7 @@ reference implementation *cwltool* instead of the more scalable and
 production-friendly CWL implementations like Toil [@vivian2017toil],
 Arvados [@arvados], Rabix [@kaushik_2017], CWL-Airflow [@cwlairflow2018]
 or Cromwell [@cromwell]. An updated list of implementations is available
-at the CWL homepage [^2]. Compared to *cwltool* these generally have
+at the CWL homepage.[^2] Compared to *cwltool* these generally have
 extensive scheduler and cloud compute support, and extensions for large
 data transfer and storage, and should therefore be considered for any
 adopters of the Common Workflow Language. In this study we have however
@@ -1918,7 +1918,7 @@ the predictable transformation step (considering it as a *pure function*
 without side-effects). Another type of ignorable steps could be purely
 diagnostic, which outputs are used primarily during workflow design to
 verify tool settings. A workflow engine does not necessarily know which
-steps are “boring” [^3] and our proof of concept implementation will
+steps are “boring”[^3] and our proof of concept implementation will
 dutifully store provenance from all steps.
 
 To improve efficiency, future *CWLProv* work could add options to ignore
