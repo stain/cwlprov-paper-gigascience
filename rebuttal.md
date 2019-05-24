@@ -1,4 +1,4 @@
-Response to the reviewers (GIGA-D-18-00483) {#response-to-the-reviewers-giga-d-18-00483 .unnumbered}
+Response to the reviewers (GIGA-D-18-00483) 
 ===========================================
 
 This is the response to the reviews of our manuscript
@@ -16,36 +16,35 @@ Reviewer 1
 
 > This paper is well structured and well written but there is a point to
 > be addressed in the evaluation. Table 5 says that the enactment of
-> Alignment Workflow with ‘cwltool’ with enabling provenance capture on
+> Alignment Workflow with `cwltool` with enabling provenance capture on
 > MacOS could not be tested due to insufficient hardware resources. Does
-> it mean that the step (I) in ‘Evaluation Activity’ for Alignment
-> Workflow could not be executed? If so, please clarify it. \[pt:foo\]
+> it mean that the step (I) in _Evaluation Activity_ for Alignment
+> Workflow could not be executed? If so, please clarify it.
 
 We agree with the reviewer on this point. We have included this
 information in the caption of Table 5.
 
-> Sometimes ‘CWLProv’ and its following word are accidentally concatenated. - e.g, p2. line 13 or 14 “CWLProvoutcome”, p2. line 32 “CWLProv0.6.0” \[pt:spelling1\]
+> Sometimes ‘CWLProv’ and its following word are accidentally concatenated. - e.g, p2. line 13 or 14 _“CWLProvoutcome”_, p2. line 32 _“CWLProv0.6.0”_
 
 Thanks for pointing this out, we have fixed these typos.
 
->  Figure 1 uses the spelling ‘artifacts’ in level 1 but this paper mainly uses ‘artefacts’. It is better to use consistent spelling. \[pt:spelling2\]
+>  Figure 1 uses the spelling _‘artifacts’_ in level 1 but this paper mainly uses _‘artefacts’_. It is better to use consistent spelling.
 
 We have now made sure the spellings are consistent by modifying the
 diagram.
 
->  The left side of Figure 2 shows a GATK workflow but the caption says the right side is a workflow. \[pt:figurecaption\]
+>  The left side of Figure 2 shows a GATK workflow but the caption says the right side is a workflow.
 
 We have edited the caption to fix this issue.
 
->  Table 5 says that the enactment of Somatic Variant Calling Workflow with ‘toil-cwl-runner’ due to a known bug. However, the link in the table is for a issue of ‘cwltool’, not ‘toil-cwl-runner’. I got confused because the enactment of the same workflow with ‘cwltool’ works. If the linked issue has occurred in ‘toil-cwl-runner’ for the variant calling workflow, I recommend making a link to the issue of ‘toil-cwl-runner’ instead of ‘cwltool’. It is less confusing. \[pt:bar\]
+>  Table 5 says that the enactment of Somatic Variant Calling Workflow with `toil-cwl-runner` due to a known bug. However, the link in the table is for a issue of `cwltool`, not `toil-cwl-runner`. I got confused because the enactment of the same workflow with `cwltool` works. If the linked issue has occurred in `toil-cwl-runner` for the variant calling workflow, I recommend making a link to the issue of `toil-cwl-runner` instead of `cwltool`. It is less confusing.
 
 We faced similar issue of Docker mount denied when testing this workflow
-using cwl-toil-runner on Mac. The previous link was intended to give an
+using `cwl-toil-runner` on Mac. The previous link was intended to give an
 idea of the nature of issue and the possible solutions proposed, which
 we tried and could not succeed to get it to work. However, we agree that
-there should be a separate issue for cwl-toil-runner. We have created
-and linked to GitHub issue (
-<https://github.com/DataBiosphere/toil/issues/2680>) to avoid confusion.
+there should be a separate issue for `cwl-toil-runner`. We have created
+and linked to GitHub issue <https://github.com/DataBiosphere/toil/issues/2680> to avoid confusion.
 
 ------------------------------------------------------------------------
 
@@ -63,7 +62,7 @@ and out of scope for this manuscript.
 
 We have explored some CWLProv consumption scenarios in *cwlprov-py* - we
 refer to for its documentation <https://pypi.org/project/cwlprov/> and
-`cwlprov –help`, in particular we would like to point out that commands
+`cwlprov --help`, in particular we would like to point out that commands
 like `cwlprov inputs` and `cwlprov outputs` can use identifiers of
 individual steps (CWLProv level 1) and nested workflows (CWLProv level
 2); these would be harder to represent in a pure file structure without
@@ -76,7 +75,7 @@ needed to build a more researcher-oriented interface based on this tool
 We have added an explanation of this to the end of section **Evaluation
 results**.
 
-> In addition, the “pragmatic” interoperability should refer to top-level provenance and thus domain-specific annotations referring to the scientific context of the computational experiment. The experiments don’t clearly show how CWLprov goes into the direction of (still ambitious and challenging) domain-specific provenance. \[pt:pragmatic\]
+> In addition, the “pragmatic” interoperability should refer to top-level provenance and thus domain-specific annotations referring to the scientific context of the computational experiment. The experiments don’t clearly show how CWLprov goes into the direction of (still ambitious and challenging) domain-specific provenance. 
 
 The framework of provenance and CWLProv as a standard conceptually can
 achieve all three states of interoperability in principle. If we achieve
@@ -111,14 +110,14 @@ As indicated under **Availability of supporting data and materials** we
 have mirrored the research objects on Zenodo as well, in addition we
 contacted Mendeley Data to raise the accessibility issue.
 
-Introduction {#introduction .unnumbered}
+Introduction
 ------------
 
-> In Key Points, 4th point, space is missing in “CWLProvoutcome”
+> In Key Points, 4th point, space is missing in _“CWLProvoutcome”_
 
 Fixed
 
-Background and related work {#background-and-related-work .unnumbered}
+Background and related work
 ---------------------------
 
 > The first paragraph of related works is too long.
@@ -126,7 +125,7 @@ Background and related work {#background-and-related-work .unnumbered}
 We have removed some details about the existing studies by mentioning
 them briefly.
 
-> “co-installability” -&gt;what does it mean?
+> _“co-installability”_ -&gt;what does it mean?
 
 This term was describing how software package managers such as Conda and
 Debian help in managing installation of multiple versions of the same
@@ -144,9 +143,10 @@ added Clark et al. (2014) and Gaignard et al. (2016) in section
 **Provenance Capture & Standardization** and Gaignard et al. (2014) in
 section **Level 3**.
 
-Levels of Provenance and resource sharing -----------------------------------------
+Levels of Provenance and resource sharing
+-----------------------------------------
 
->  “... in Figure 1 that all WMs can benefit from and conform to without additional technical overhead” -&gt;difficult to believe that there is no technical overhead
+>  _“... in Figure 1 that all WMs can benefit from and conform to without additional technical overhead”_ -&gt;difficult to believe that there is no technical overhead
 
 We have changed the statement by replacing “no technical overhead” to
 “minimum technical overhead”. If these levels are kept in mind from the
@@ -249,7 +249,7 @@ CWLProv evaluation
 refers to scientific context/claims, etc., it is unclear how pragmatic
 interoperability is addressed.
 
-We have addressed this comment in response to \[pt:pragmatic\].
+We have addressed this comment in response to "pragmatic interoperability" above.
 
 > Why choosing these 3 bioinformatics workflows, do they cover different
 aspects of the evaluation? Maybe a single in-depth description would be
@@ -271,7 +271,7 @@ successful enactment.”*
 scenarios but the interoperability evaluation is less clear towards the
 “pragmatic assumption” and domain annotations.
 
-We have addressed this comment in response to \[pt:pragmatic\].
+We have addressed this comment in response to "pragmatic interoperability" above.
 
 > Temporal and spatial overhead -&gt;For the RNAseq and Alignment
 workflows, the Prov overhead appears as quite noticeable. Which part of
