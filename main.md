@@ -243,35 +243,36 @@ As the PROV-DM has a generalized structure, there might be some provenance aspec
 Retrospective Provenance Profile
 --------------------------------
 
-<span>l l l l L</span> PROV type & Subtype & Relation & Range & Recommendation
-**Plan** & wfdesc:Workflow & wfdesc:hasSubProcess & wfdesc:Process & R9-workflow
-& wfdesc:Process & &
-**Activity** & wfprov:WorkflowRun & wasAssociatedWith & wfprov:WorkflowEngine & R8-environment
-& & <span>   <span>↳  </span>hadPlan </span> &   wfdesc:Workflow & R9-workflow, R17-executable
-& & wasStartedBy & wfprov:WorkflowEngine & R8-environment
-& & <span>   <span>↳  </span>atTime </span> &   <span> *ISO8601 timestamp* </span> & R13-provenance
-& & wasStartedBy & wfprov:WorkflowRun & R9-workflow
-& & wasEndedBy & wfprov:WorkflowEngine & R8-environment
-& & <span>   <span>↳  </span>atTime </span> &   <span> *ISO8601 timestamp* </span> & R13-provenance
-& wfprov:ProcessRun & wasStartedBy & wfprov:WorkflowRun & R10-software
-& & <span>   <span>↳  </span>atTime </span> &   <span> *ISO8601 timestamp* </span> & R14-provenance
-& & used & wfprov:Artifact & R11-raw-data
-& & <span>   <span>↳  </span>role </span> &   wfdesc:InputParameter & R1-parameters
-& & wasAssociatedWith & wfprov:WorkflowRun & R9-workflow
-& & <span>   <span>↳  </span>hadPlan </span> &   wfdesc:Process & R17-executable, R16-format
-& & wasEndedBy & wfprov:WorkflowRun & R13-provenance
-& & <span>   <span>↳  </span>atTime </span> &   <span> *ISO8601 timestamp* </span> & R13-provenance
-& SoftwareAgent & wasAssociatedWith & wfprov:ProcessRun & R8-environment
-& & <span>   <span>↳  </span>cwlprov:image </span> &   <span> *docker image id* </span> & R4-sw-version
-**SoftwareAgent** & wfprov:WorkFlowEngine & wasStartedBy & Person <span> *ORCID* </span> & R12-attribution
-& & label & <span> *cwltool `--`version* </span> & R4-sw-version
-**Entity** & wfprov:Artefact & wasGeneratedBy & wfprov:Processrun & R3-intermediate, R7-identifier
-& & <span>   <span>↳  </span>role </span> &   wfdesc:OutputParameter & R1-parameters
-**Collection** & wfprov:Artefact & hadMember & wfprov:Artefact & R3-intermediate
-& Dictionary & hadDictionaryMember & wfprov:Artefact &
-& & <span>   <span>↳  </span>pairKey </span> &   <span> *filename* </span> & R7-identifier
+| PROV type  |  Subtype         | Relation             |  Range          |  Recommendation |
+| ---------- | ---------------- | -------------------- | --------------- | ---------------- |
+| **Plan**   |  wfdesc:Workflow | wfdesc:hasSubProcess |  wfdesc:Process |  R9-workflow |
+|            |  wfdesc:Process  |                      |                 |   |
+| **Activity**  |  wfprov:WorkflowRun  |  wasAssociatedWith  |  wfprov:WorkflowEngine  |  R8-environment |
+|   |  |     ↳   hadPlan  |     wfdesc:Workflow  |  R9-workflow,  R17-executable |
+|   |  |  wasStartedBy  |  wfprov:WorkflowEngine  |  R8-environment |
+|   |  |     ↳   atTime  |     *ISO8601  timestamp*  |  R13-provenance |
+|   |  |  wasStartedBy  |  wfprov:WorkflowRun  |  R9-workflow |
+|   |  |  wasEndedBy  |  wfprov:WorkflowEngine  |  R8-environment |
+|   |  |     ↳   atTime  |     *ISO8601  timestamp*  |  R13-provenance |
+|   |  wfprov:ProcessRun  |  wasStartedBy  |  wfprov:WorkflowRun  |  R10-software |
+|   |  |     ↳   atTime  |     *ISO8601  timestamp*  |  R14-provenance |
+|   |  |  used  |  wfprov:Artifact  |  R11-raw-data |
+|   |  |     ↳   role  |     wfdesc:InputParameter  |  R1-parameters |
+|   |  |  wasAssociatedWith  |  wfprov:WorkflowRun  |  R9-workflow |
+|   |  |     ↳   hadPlan  |     wfdesc:Process  |  R17-executable,  R16-format |
+|   |  |  wasEndedBy  |  wfprov:WorkflowRun  |  R13-provenance |
+|   |  |     ↳   atTime  |     *ISO8601  timestamp*  |  R13-provenance |
+|   |  SoftwareAgent  |  wasAssociatedWith  |  wfprov:ProcessRun  |  R8-environment |
+|   |  |     ↳   cwlprov:image  |     *docker  image  id*  |  R4-sw-version |
+| **SoftwareAgent**  |  wfprov:WorkFlowEngine  |  wasStartedBy  |  Person  *ORCID*  |  R12-attribution |
+|   |  |  label  |  *cwltool  `--`version*  |  R4-sw-version |
+| **Entity**  |  wfprov:Artefact  |  wasGeneratedBy  |  wfprov:Processrun  |  R3-intermediate,  R7-identifier |
+|   |  |     ↳   role  |     wfdesc:OutputParameter  |  R1-parameters |
+| **Collection**  |  wfprov:Artefact  |  hadMember  |  wfprov:Artefact  |  R3-intermediate |
+|   |  Dictionary  |  hadDictionaryMember  |  wfprov:Artefact  |   |
+|   |  |     ↳   pairKey  |     *filename*  |  R7-identifier |
 
-Indentation with <span>↳  </span>indicates n-ary relationships which are expressed differently depending on PROV syntax. Namespaces: <http://www.w3.org/ns/prov#> (default), <http://purl.org/wf4ever/wfdesc#> (*wfdesc*), <http://purl.org/wf4ever/wfprov#> (*wfprov*), <https://w3id.org/cwl/prov#> *cwlprov*)
+Indentation with ↳  indicates n-ary relationships which are expressed differently depending on PROV syntax. Namespaces: <http://www.w3.org/ns/prov#> (default), <http://purl.org/wf4ever/wfdesc#> (*wfdesc*), <http://purl.org/wf4ever/wfprov#> (*wfprov*), <https://w3id.org/cwl/prov#> *cwlprov*)
 
 As stated earlier, the primary provenance file should conform to the PROV-N (Moreau, Missier, Cheney, et al. [2013](#ref-moreau_2013)) serialisation of PROV data model, and may optionally use ontologies specific to the workflow execution. The key features used in the structure of the retrospective provenance profile for a CWL workflow enactment in *CWLProv* are listed in Table \[tab:provProfile\]). These features are not tied to any platform or workflow definition approach and hence can be used to document retrospective provenance of any workflow irrespective of the workflow definition approach.
 
