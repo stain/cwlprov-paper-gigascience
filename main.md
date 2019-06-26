@@ -102,7 +102,7 @@ All these efforts are fairly recent and use a standardized approach to provenanc
 
 As evident from the literature, there are efforts in progress to resolve the issues associated with effective and complete sharing of computational analysis including both the results and provenance information. These studies range from highly domain-specific solutions and platform-dependent objects to open source flexible interoperable standards. CWL has widespread adoption as a workflow definition standard, hence is an ideal candidate for portable workflow definitions. The next section investigates existing studies focused on workflow-centric science, and summarises best practice recommendations put forward in these studies. From this we define a hierarchical provenance and resource sharing framework.
 
-\[t!\] <img src="images/recommendations2.png" alt="image" />
+<img src="images/recommendations2.png" alt="image" />
 
 | #  | Recommendations | Justifications |
 | -- | --------------- | -------------- |
@@ -195,7 +195,7 @@ Common Workflow Language (Amstutz et al. [2016](#ref-cwl)) provides declarative 
 
 CWL is a community-driven standard effort that has been widely adopted by many workflow design and execution platforms, supporting interoperability across a set of diverse platforms. Current adopters include Toil, Arvados, Rabix (Kaushik et al. [2017](#ref-kaushik_2017)), Cromwell (Voss, Auwera, and Gentry [2017](#ref-cromwell)), REANA, and Bcbio (Guimera [2012](#ref-guimera_2012)) with implementations for Galaxy, Apache Taverna, and AWE currently in progress.
 
-\[t!\] <img src="images/twostep.png" alt="image" />
+<img src="images/twostep.png" alt="image" />
 
 A workflow in CWL is composed of “steps” where each step refers either to a command line tool (also specified using CWL) or another workflow specification incorporating the concept of “sub-workflows”. Each “step” is associated with “inputs” that are comprised of any data artefact required for the execution of that step (Figure \[fig:bwa-mem\]). As a result of the execution of each step, “outputs” are produced which can become (part of) “inputs” for the next steps making the execution data-flow oriented. CWL is not tied to a specific operating system or platform which makes it an ideal approach for interoperable workflow definitions.
 
