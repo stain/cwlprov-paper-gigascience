@@ -1,5 +1,5 @@
 
-# Sharing interoperable workow provenance: A review of best practices and their practical application in CWLProv
+# Sharing interoperable workflow provenance: A review of best practices and their practical application in CWLProv
 
 * **Identifier**: https://doi.org/10.5281/zenodo.3196309 (this preprint)
 * **Status**: Accepted to appear in GigaScience (GIGA-D-18-00483). Revised following peer-review.
