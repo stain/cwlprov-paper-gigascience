@@ -1,11 +1,31 @@
-Provenance; Common Workflow Language; CWL; Research Object; RO; BagIt; Interoperability; Scientific Workflows; Containers
 
-Introduction
-============
+# Sharing interoperable workow provenance: A review of best practices and their practical application in CWLProv
 
-Out of the many big data domains, genomics is considered *“the most demanding”* with respect to all stages of the data lifecycle - from acquisition, storage, distribution and analysis (Stephens et al. [2015](#ref-stephens_2015)). As genomic data is growing at an unprecedented rate due to improved sequencing technologies and reduced cost, it is currently challenging to analyse the data at a rate matching its production. With data growing exponentially in size and volume, the practice to perform computational analyses using *workflows* has overtaken more traditional research methods using ad-hoc scripts which were the typical modus operandi over the last few decades (Atkinson et al. [2017](#ref-atkinson_2017); Spjuth et al. [2015](#ref-Spjuth2015)). Scientific workflow design and management has become an essential part of many computationally driven data-intensive analyses enabling Automation, Scaling, Adaptation and Provenance support (ASAP)(Cuevas-Vicenttín et al. [2012](#ref-cuevasvicenttn_2012)). Increased use of workflows has driven rapid growth in the number of computational data analysis WMSs, with hundreds of heterogeneous approaches now existing for workflow specification and execution (Common Workflow Language project [2018](#ref-cwl-existing-workflow-systems)). There is an urgent need for a common format and standard to define workflows and enable sharing of analysis results using a given workflow environment.
+* **Identifier**: https://doi.org/10.5281/zenodo.3196309 (this preprint)
+* **Status**: Accepted to appear in GigaScience (GIGA-D-18-00483). Revised following peer-review.
+* **Date:** 2019-05-23
+  * Modified for web: 2019-06-26
+* **Authors:**
+  * Farah Zaib Khan <https://orcid.org/0000-0002-6337-3037>
+  * Stian Soiland-Reyes <https://orcid.org/0000-0001-9842-9718>
+  * Richard O. Sinnott <https://orcid.org/0000-0001-5998-222X>
+  * Andrew Lonie <https://orcid.org/0000-0002-2006-3856>
+  * Carole Goble <https://orcid.org/0000-0003-1219-2137>
+  * Michael R. Crusoe <https://orcid.org/0000-0002-2961-9670>
+* **Keywords**: Provenance; Common Workflow Language; CWL; Research Object; RO; BagIt; Interoperability; Scientific Workflows; Containers
 
-\[contributions\] The contribution of this paper is fourfold:
+Abstract
+========
+**Background:** The automation of data analysis in the form of scientific workflows has become a widely adopted practice in many fields of research. Computationally driven data-intensive experiments using workflows enable Automation, Scaling, Adaption and Provenance support (ASAP). However, there are still several challenges associated with the effective sharing, publication and reproducibility of such workflows due to the incomplete capture of provenance and lack of interoperability between different technical (software) platforms.
+
+**Results:** Based on best practice recommendations identified from literature on workflow design, sharing and publishing, we define a hierarchical provenance framework to achieve uniformity in the provenance and support comprehensive and fully re-executable workflows equipped with domain-specific information. To realise this framework, we present CWLProv, a standard-based format to represent any workflow-based computational analysis to produce workflow output artefacts that satisfy the various levels of provenance. We utilise open source community-driven standards; interoperable workflow definitions in Common Workflow Language (CWL), structured provenance representation using the W3C PROV model, and resource aggregation and sharing as workflow-centric Research Objects (RO) generated along with the final outputs of a given workflow enactment. We demonstrate the utility of this approach through a practical implementation of CWLProv and evaluation using real-life genomic workflows developed by independent groups.
+
+**Conclusions:** The underlying principles of the standards utilised by CWLProv enable semantically-rich and executable Research Objects that capture computational workflows with retrospective provenance such that any platform supporting CWL will be able to understand the analysis, re-use the methods for partial re-runs, or reproduce the analysis to validate the published findings.
+
+
+## Key points
+
+The contribution of this paper is fourfold:
 
 -   We have gathered best-practice recommendations from the existing literature, and reflect on the various authors’ experiences with workflow managements systems and especially with regards to factors to consider when a computational analysis is designed, executed and shared.
 
@@ -14,6 +34,11 @@ Out of the many big data domains, genomics is considered *“the most demanding�
 -   Building on this provenance hierarchy, we define *CWLProv* for the methodical representation of artefacts associated with a given workflow enactment associated with any study involving computational data-intensive analysis.
 
 -   Finally, we demonstrate the utilisation of *CWLProv* by extending an existing workflow execution engine *cwltool* (Amstutz et al. [2018](#ref-cwltool)) to produce workflow-centric Research Objects generated as a result of a given workflow enactment. We illustrate this through a case study of using workflows designed by external (independent) developers, and subsequently evaluate the interoperability, reproducibility and completeness of the generated *CWLProv* outcome.
+
+Introduction
+============
+
+Out of the many big data domains, genomics is considered *“the most demanding”* with respect to all stages of the data lifecycle - from acquisition, storage, distribution and analysis (Stephens et al. [2015](#ref-stephens_2015)). As genomic data is growing at an unprecedented rate due to improved sequencing technologies and reduced cost, it is currently challenging to analyse the data at a rate matching its production. With data growing exponentially in size and volume, the practice to perform computational analyses using *workflows* has overtaken more traditional research methods using ad-hoc scripts which were the typical modus operandi over the last few decades (Atkinson et al. [2017](#ref-atkinson_2017); Spjuth et al. [2015](#ref-Spjuth2015)). Scientific workflow design and management has become an essential part of many computationally driven data-intensive analyses enabling Automation, Scaling, Adaptation and Provenance support (ASAP)(Cuevas-Vicenttín et al. [2012](#ref-cuevasvicenttn_2012)). Increased use of workflows has driven rapid growth in the number of computational data analysis WMSs, with hundreds of heterogeneous approaches now existing for workflow specification and execution (Common Workflow Language project [2018](#ref-cwl-existing-workflow-systems)). There is an urgent need for a common format and standard to define workflows and enable sharing of analysis results using a given workflow environment.
 
 Common Workflow Language (CWL) (Amstutz et al. [2016](#ref-cwl)) has emerged as a workflow definition standard designed to enable portability, interoperability and reproducibility of analyses between workflow platforms. CWL has been widely adopted by more than 20 organisations, providing an interoperable bridge overcoming the heterogeneity of workflow environments. Whilst a common standard for workflow definition is an important step towards interoperable solutions for workflow specifications, sharing and publishing the *results* of these workflow enactments in a common format is equally important. Transparent and comprehensive sharing of experimental designs is critical to establish trust and ensure authenticity, quality and reproducibility of any workflow-based research result. Currently there is no common format defined and agreed upon for interoperable workflow archiving or sharing (Ivie and Thain [2018](#ref-Ivie2018)).
 
@@ -79,26 +104,27 @@ As evident from the literature, there are efforts in progress to resolve the iss
 
 \[t!\] <img src="images/recommendations2.png" alt="image" />
 
-<span>p<span>1.4cm</span> L L</span> & <span>**Recommendations**</span> & <span>**Justifications**</span>
-R1 & Save and share all parameters used for each software executed in a given workflow (including default values of parameters used) (Nekrutenko and Taylor [2012](#ref-Nekrutenko2012); Garijo et al. [2013](#ref-garijo_2013); Garijo, Gil, and Corcho [2017](#ref-garijo_2017); Sandve et al. [2013](#ref-sandve_2013)). & Impacts on reproducibility of results since different inputs and configurations of the software can produce different results. Different versions of a tool might upgrade the default values of the parameters.
-R2 & Avoid manual processing of data and if using *shims* (Mohan, Lu, and Kotov [2014](#ref-Mohan2014)) then make these part of the workflow to fully automate the computational process (Nekrutenko and Taylor [2012](#ref-Nekrutenko2012); Sandve et al. [2013](#ref-sandve_2013)). & This ensures the complete capture of the computational process without broken links so that the analysis can be executed without need for performing manual steps.
-R3 & Include intermediate results where possible when publishing an analysis (Garijo et al. [2013](#ref-garijo_2013); Garijo, Gil, and Corcho [2017](#ref-garijo_2017); Sandve et al. [2013](#ref-sandve_2013)). & Intermediate data products can be used to inspect and understand shared analysis when re-enactment is not possible.
-R4 & Record the exact software versions used (Nekrutenko and Taylor [2012](#ref-Nekrutenko2012); Sandve et al. [2013](#ref-sandve_2013)). & This is necessary for reproducibility of results as different software versions can produce different results.
-R5 & If using public data (reference data, variant databases), then it is necessary to store and share the actual data versions used (Spjuth et al. [2015](#ref-Spjuth2015); Kanwal et al. [2017](#ref-kanwal_2017); Nekrutenko and Taylor [2012](#ref-Nekrutenko2012); Sandve et al. [2013](#ref-sandve_2013)) . & This is needed as different versions of data, e.g. human reference genome or variant databases, can result in slightly different results for the same workflow.
-R6 & Workflows should be well-described, annotated and offer associated metadata. Annotations such as user contributed tags and versions should be assigned to workflows and shared when publishing the workflows and associated results (Belhajjame et al. [2015](#ref-belhajjame_2015); Belhajjame et al. [2012](#ref-belhajjame_2012); Garijo, Gil, and Corcho [2017](#ref-garijo_2017); Littauer et al. [2012](#ref-Littauer2012); Stodden et al. [2016](#ref-stodden_2016)) . & Metadata and annotations improve the understandability of the workflow, facilitate independent re-use by someone skilled in the field, make workflows more accessible and hence promote the longevity of the workflows.
-R7 & Use and store stable identifiers for all artefacts including the workflow, the datasets and the software components (Littauer et al. [2012](#ref-Littauer2012); Stodden et al. [2016](#ref-stodden_2016)). & Identifiers play an important role in the discovery, citation and accessibility of resources made available in open-access repositories.
-R8 & Share the details of the computational environment (Belhajjame et al. [2015](#ref-belhajjame_2015); Kanwal et al. [2017](#ref-kanwal_2017); Stodden et al. [2016](#ref-stodden_2016)) . & Such details support requirements analysis before any re-enactment or reproducibility is attempted.
-R9 & Share workflow specifications/descriptions used in the analysis (Belhajjame et al. [2015](#ref-belhajjame_2015); Garijo et al. [2013](#ref-garijo_2013); Garijo, Gil, and Corcho [2017](#ref-garijo_2017); Stodden et al. [2016](#ref-stodden_2016); Stodden and Miguez [2014](#ref-Stodden2014)). & The same workflow specifications can be used with different datasets thereby supporting re-usability.
-R10 & Aggregate the software with the analysis and share this when publishing a given analysis (Belhajjame et al. [2015](#ref-belhajjame_2015); Kanwal et al. [2017](#ref-kanwal_2017); Stodden et al. [2016](#ref-stodden_2016); Stodden and Miguez [2014](#ref-Stodden2014); Garijo, Gil, and Corcho [2017](#ref-garijo_2017)). & Making software available reduces dependence on third party resources and as a result minimizes *workflow decay* (Zhao et al. [2012](#ref-Zhao2012)).
-R11 & Share raw data used in the analysis (Belhajjame et al. [2015](#ref-belhajjame_2015); Garijo et al. [2013](#ref-garijo_2013); Garijo, Gil, and Corcho [2017](#ref-garijo_2017); Stodden et al. [2016](#ref-stodden_2016); Stodden and Miguez [2014](#ref-Stodden2014)). & When someone wants to validate published results, availability of data supports verification of claims and hence establishes trust in the published analysis
-R12 & Store all attributions related to data resources and software systems used (Garijo, Gil, and Corcho [2017](#ref-garijo_2017); Stodden and Miguez [2014](#ref-Stodden2014)). & Accreditation supports proper citation of resources used.
-R13 & Workflows should be preserved along with the provenance trace of the data and results (Belhajjame et al. [2015](#ref-belhajjame_2015); Belhajjame et al. [2012](#ref-belhajjame_2012); Garijo, Gil, and Corcho [2017](#ref-garijo_2017); Sandve et al. [2013](#ref-sandve_2013); Stodden and Miguez [2014](#ref-Stodden2014)). & A provenance trace provides a historical view of the workflow enactment, enabling end users to better understand the analysis retrospectively
-R14 & Data flow diagrams of the computational analysis using workflows should be provided (Kanwal et al. [2017](#ref-kanwal_2017); Garijo et al. [2013](#ref-garijo_2013)). & These diagrams are easy to understand and provide a human readable view of the workflow.
-R15 & Open source licensing for methods, software, code, workflows and data should be adopted instead of proprietary resources (Kanwal et al. [2017](#ref-kanwal_2017); Garijo et al. [2013](#ref-garijo_2013); Sandve et al. [2013](#ref-sandve_2013); Stodden et al. [2016](#ref-stodden_2016); Stodden and Miguez [2014](#ref-Stodden2014); Gymrek and Farjoun [2016](#ref-Gymrek2016)). & This improve availability and legal re-use of the resources used in the original analysis, while restricted licenses would hinder reproducibility.
-R16 & Data, code and all workflow steps should be shared in a format that others can easily understand preferably in a system neutral language (Belhajjame et al. [2015](#ref-belhajjame_2015); Garijo et al. [2013](#ref-garijo_2013); Gymrek and Farjoun [2016](#ref-Gymrek2016)). & System neutral languages help achieve interoperability and make an analysis understandable.
-R17 & Promote easy execution of workflows without making significant changes to the underlying environment (Spjuth et al. [2015](#ref-Spjuth2015)). & In addition to helping reproducibility, this enables adapting the analysis methods to other infrastructures and improves workflow portability.
-R18 & Information about compute and storage resources should be stored and shared as part of the workflow (Kanwal et al. [2017](#ref-kanwal_2017)). & Such information can assist users in estimating the required resources needed for an analysis and thereby reduce the amount of failed executions.
-R19 & Example input and sample output data should be preserved and published along with the workflow-based analysis (Belhajjame et al. [2015](#ref-belhajjame_2015); Zhao et al. [2012](#ref-Zhao2012)). & This information enables more efficient test runs of an analysis to verify and understand the methods used.
+| #  | Recommendations | Justifications |
+| -- | --------------- | -------------- |
+R1 | Save and share all parameters used for each software executed in a given workflow (including default values of parameters used) (Nekrutenko and Taylor [2012](#ref-Nekrutenko2012); Garijo et al. [2013](#ref-garijo_2013); Garijo, Gil, and Corcho [2017](#ref-garijo_2017); Sandve et al. [2013](#ref-sandve_2013)). | Impacts on reproducibility of results since different inputs and configurations of the software can produce different results. Different versions of a tool might upgrade the default values of the parameters.
+R2 | Avoid manual processing of data and if using *shims* (Mohan, Lu, and Kotov [2014](#ref-Mohan2014)) then make these part of the workflow to fully automate the computational process (Nekrutenko and Taylor [2012](#ref-Nekrutenko2012); Sandve et al. [2013](#ref-sandve_2013)). | This ensures the complete capture of the computational process without broken links so that the analysis can be executed without need for performing manual steps.
+R3 | Include intermediate results where possible when publishing an analysis (Garijo et al. [2013](#ref-garijo_2013); Garijo, Gil, and Corcho [2017](#ref-garijo_2017); Sandve et al. [2013](#ref-sandve_2013)). | Intermediate data products can be used to inspect and understand shared analysis when re-enactment is not possible.
+R4 | Record the exact software versions used (Nekrutenko and Taylor [2012](#ref-Nekrutenko2012); Sandve et al. [2013](#ref-sandve_2013)). | This is necessary for reproducibility of results as different software versions can produce different results.
+R5 | If using public data (reference data, variant databases), then it is necessary to store and share the actual data versions used (Spjuth et al. [2015](#ref-Spjuth2015); Kanwal et al. [2017](#ref-kanwal_2017); Nekrutenko and Taylor [2012](#ref-Nekrutenko2012); Sandve et al. [2013](#ref-sandve_2013)) . | This is needed as different versions of data, e.g. human reference genome or variant databases, can result in slightly different results for the same workflow.
+R6 | Workflows should be well-described, annotated and offer associated metadata. Annotations such as user contributed tags and versions should be assigned to workflows and shared when publishing the workflows and associated results (Belhajjame et al. [2015](#ref-belhajjame_2015); Belhajjame et al. [2012](#ref-belhajjame_2012); Garijo, Gil, and Corcho [2017](#ref-garijo_2017); Littauer et al. [2012](#ref-Littauer2012); Stodden et al. [2016](#ref-stodden_2016)) . | Metadata and annotations improve the understandability of the workflow, facilitate independent re-use by someone skilled in the field, make workflows more accessible and hence promote the longevity of the workflows.
+R7 | Use and store stable identifiers for all artefacts including the workflow, the datasets and the software components (Littauer et al. [2012](#ref-Littauer2012); Stodden et al. [2016](#ref-stodden_2016)). | Identifiers play an important role in the discovery, citation and accessibility of resources made available in open-access repositories.
+R8 | Share the details of the computational environment (Belhajjame et al. [2015](#ref-belhajjame_2015); Kanwal et al. [2017](#ref-kanwal_2017); Stodden et al. [2016](#ref-stodden_2016)) . | Such details support requirements analysis before any re-enactment or reproducibility is attempted.
+R9 | Share workflow specifications/descriptions used in the analysis (Belhajjame et al. [2015](#ref-belhajjame_2015); Garijo et al. [2013](#ref-garijo_2013); Garijo, Gil, and Corcho [2017](#ref-garijo_2017); Stodden et al. [2016](#ref-stodden_2016); Stodden and Miguez [2014](#ref-Stodden2014)). | The same workflow specifications can be used with different datasets thereby supporting re-usability.
+R10 | Aggregate the software with the analysis and share this when publishing a given analysis (Belhajjame et al. [2015](#ref-belhajjame_2015); Kanwal et al. [2017](#ref-kanwal_2017); Stodden et al. [2016](#ref-stodden_2016); Stodden and Miguez [2014](#ref-Stodden2014); Garijo, Gil, and Corcho [2017](#ref-garijo_2017)). | Making software available reduces dependence on third party resources and as a result minimizes *workflow decay* (Zhao et al. [2012](#ref-Zhao2012)).
+R11 | Share raw data used in the analysis (Belhajjame et al. [2015](#ref-belhajjame_2015); Garijo et al. [2013](#ref-garijo_2013); Garijo, Gil, and Corcho [2017](#ref-garijo_2017); Stodden et al. [2016](#ref-stodden_2016); Stodden and Miguez [2014](#ref-Stodden2014)). | When someone wants to validate published results, availability of data supports verification of claims and hence establishes trust in the published analysis
+R12 | Store all attributions related to data resources and software systems used (Garijo, Gil, and Corcho [2017](#ref-garijo_2017); Stodden and Miguez [2014](#ref-Stodden2014)). | Accreditation supports proper citation of resources used.
+R13 | Workflows should be preserved along with the provenance trace of the data and results (Belhajjame et al. [2015](#ref-belhajjame_2015); Belhajjame et al. [2012](#ref-belhajjame_2012); Garijo, Gil, and Corcho [2017](#ref-garijo_2017); Sandve et al. [2013](#ref-sandve_2013); Stodden and Miguez [2014](#ref-Stodden2014)). | A provenance trace provides a historical view of the workflow enactment, enabling end users to better understand the analysis retrospectively
+R14 | Data flow diagrams of the computational analysis using workflows should be provided (Kanwal et al. [2017](#ref-kanwal_2017); Garijo et al. [2013](#ref-garijo_2013)). | These diagrams are easy to understand and provide a human readable view of the workflow.
+R15 | Open source licensing for methods, software, code, workflows and data should be adopted instead of proprietary resources (Kanwal et al. [2017](#ref-kanwal_2017); Garijo et al. [2013](#ref-garijo_2013); Sandve et al. [2013](#ref-sandve_2013); Stodden et al. [2016](#ref-stodden_2016); Stodden and Miguez [2014](#ref-Stodden2014); Gymrek and Farjoun [2016](#ref-Gymrek2016)). | This improve availability and legal re-use of the resources used in the original analysis, while restricted licenses would hinder reproducibility.
+R16 | Data, code and all workflow steps should be shared in a format that others can easily understand preferably in a system neutral language (Belhajjame et al. [2015](#ref-belhajjame_2015); Garijo et al. [2013](#ref-garijo_2013); Gymrek and Farjoun [2016](#ref-Gymrek2016)). | System neutral languages help achieve interoperability and make an analysis understandable.
+R17 | Promote easy execution of workflows without making significant changes to the underlying environment (Spjuth et al. [2015](#ref-Spjuth2015)). | In addition to helping reproducibility, this enables adapting the analysis methods to other infrastructures and improves workflow portability.
+R18 | Information about compute and storage resources should be stored and shared as part of the workflow (Kanwal et al. [2017](#ref-kanwal_2017)). | Such information can assist users in estimating the required resources needed for an analysis and thereby reduce the amount of failed executions.
+R19 | Example input and sample output data should be preserved and published along with the workflow-based analysis (Belhajjame et al. [2015](#ref-belhajjame_2015); Zhao et al. [2012](#ref-Zhao2012)). | This information enables more efficient test runs of an analysis to verify and understand the methods used.
 
 This list is not exhaustive, other studies have identified separate issues (e.g. lab work provenance and data security) that are beyond the scope of this work.
 
@@ -187,7 +213,7 @@ While ROs can be serialized in several different ways, in this work we have reus
 
 The World Wide Web Consortium (W3C) developed *PROV*, a suite of specifications for unified/interoperable representation and publication of provenance information on the Web. The underlying conceptual PROV Data Model (PROV-DM) (Moreau, Missier, Belhajjame, et al. [2013](#ref-PROVDM)) provides a domain-agnostic model designed to capture fundamental features of provenance with support for extensions to integrate domain-specific information (Figure \[fig:prov-dm\]).
 
-\[!b\] <embed src="images/key-concepts.svg" title="fig:" />
+<img src="images/key-concepts.svg" title="fig:" />
 
 We utilize mainly two serialisations of PROV for this study, PROV-Notation (PROV-N) (Moreau, Missier, Cheney, et al. [2013](#ref-moreau_2013)) and PROV-JSON (Huynh et al. [2013](#ref-huynh_2013)). PROV-N is designed to achieve serialisation of PROV-DM instances by formally representing the information using a simplified textual syntax to improve human readability. PROV-JSON is a lightweight interoperable representation of PROV assertions using JavaScript constructs and data types. The key design and implementation principles of these two serialisations of PROV are in compliance with the goals of this study, i.e. understandable and interoperable, hence are a natural choice to support the design of an adaptable provenance profile. For completeness we also explored serializing the provenance graph as PROV-XML (Hua et al. [2013](#ref-PROVXML)) as well as PROV-O (Lebo et al. [2013](#ref-PROVO)), which provides a mapping to Linked Data and ontologies, with potential for rich queries and further integration using a triple store. One challenge here is the wide variety of OWL and RDF formats, we opted for Turtle, N-Triples and JSON-LD, but concluded that requiring all of these PROV and RDF serializations would be an unnecessary burden for other implementations of *CWLProv*.
 
@@ -210,15 +236,15 @@ To ensure RO portability, these file objects may not exactly match the file name
 
 In the case of a CWL workflow, *cwltool* can aggregate the CWL description and any referenced external descriptions (such as sub-workflows or command line tool descriptions) into a single workflow file using `cwltool --pack`. This feature is used in our implementation (details in section ****) to rewrite the workflow files, making them re-executable without depending on workflow or commandline descriptions on the file system outside the RO. Other workflow definition approaches, WMS or CWL executors should apply similar features to ensure workflow definitions are executable outside their original file system location.
 
-**What is BagIt?**
-
-**BagIt** is an IETF Internet Standard (RFC8493)(Network Working Group [2017](#ref-bagit17)) that defines a structured file hierarchy for the purpose of digital preservation of data files. BagIt was initiated by the US Library of Congress and the California Digital Library, and is now used by libraries and archives to ensure safe transmission and storage of datasets using “bags”.
-
-A **bag** is indicated by the presence of `bagit.txt` and a *payload* of digital content stored as files and sub-folders in the `data/` folder. Other files are considered *tag files* to further describe the payload. All the payload files are listed in a *manifest* with checksums of their byte content, e.g. `manifest-sha256.txt` and equivalent for tag files in `tagmanifest-sha256.txt`. Basic metadata can be provided in `bag-info.txt` as key-value pairs.
-
-A bag can be checked to be *complete* if all the files listed in the manifests exist, and is also considered *valid* if the manifest matches the checksum of each file, ensuring they have been correctly transferred.
-
-**BDBag** (Big Data bag)(Chard et al. [2016](#ref-chard_2016)) is a profile of BagIt that adds a *Research Object*(Soiland-Reyes, Gamble, and Haines [2014](#ref-RObundle)) `metadata/manifest.json` in JSON-LD (Sporny et al. [2014](#ref-JSONLD)) format to contain richer Linked Data annotations that may not fit well in `bag-info.txt`, e.g. authors of an individual file. BDBags can include a `fetch.txt` to reference external resources using *ARK MinIDs* or HTTP URLs, allowing bags that contain large files without necessarily transferring their bytes.
+> ### What is BagIt?
+> 
+> **BagIt** is an IETF Internet Standard (RFC8493)(Network Working Group [2017](#ref-bagit17)) that defines a structured file hierarchy for the purpose of digital preservation of data files. BagIt was initiated by the US Library of Congress and the California Digital Library, and is now used by libraries and archives to ensure safe transmission and storage of datasets using “bags”.
+> 
+> A **bag** is indicated by the presence of `bagit.txt` and a *payload* of digital content stored as files and sub-folders in the `data/` folder. Other files are considered *tag files* to further describe the payload. All the payload files are listed in a *manifest* with checksums of their byte content, e.g. `manifest-sha256.txt` and equivalent for tag files in `tagmanifest-sha256.txt`. Basic metadata can be provided in `bag-info.txt` as key-value pairs.
+> 
+> A bag can be checked to be *complete* if all the files listed in the manifests exist, and is also considered *valid* if the manifest matches the checksum of each file, ensuring they have been correctly transferred.
+> 
+> **BDBag** (Big Data bag)(Chard et al. [2016](#ref-chard_2016)) is a profile of BagIt that adds a *Research Object*(Soiland-Reyes, Gamble, and Haines [2014](#ref-RObundle)) `metadata/manifest.json` in JSON-LD (Sporny et al. [2014](#ref-JSONLD)) format to contain richer Linked Data annotations that may not fit well in `bag-info.txt`, e.g. authors of an individual file. BDBags can include a `fetch.txt` to reference external resources using *ARK MinIDs* or HTTP URLs, allowing bags that contain large files without necessarily transferring their bytes.
 
 ### snapshot/
 
@@ -248,7 +274,7 @@ Retrospective Provenance Profile
 | **Plan**   |  wfdesc:Workflow | wfdesc:hasSubProcess |  wfdesc:Process |  R9-workflow |
 |            |  wfdesc:Process  |                      |                 |   |
 | **Activity**  |  wfprov:WorkflowRun  |  wasAssociatedWith  |  wfprov:WorkflowEngine  |  R8-environment |
-|   |  |     ↳   hadPlan  |     wfdesc:Workflow  |  R9-workflow,  R17-executable |
+|            |  |     ↳   hadPlan  |     wfdesc:Workflow  |  R9-workflow,  R17-executable |
 |   |  |  wasStartedBy  |  wfprov:WorkflowEngine  |  R8-environment |
 |   |  |     ↳   atTime  |     *ISO8601  timestamp*  |  R13-provenance |
 |   |  |  wasStartedBy  |  wfprov:WorkflowRun  |  R9-workflow |
@@ -265,7 +291,7 @@ Retrospective Provenance Profile
 |   |  SoftwareAgent  |  wasAssociatedWith  |  wfprov:ProcessRun  |  R8-environment |
 |   |  |     ↳   cwlprov:image  |     *docker  image  id*  |  R4-sw-version |
 | **SoftwareAgent**  |  wfprov:WorkFlowEngine  |  wasStartedBy  |  Person  *ORCID*  |  R12-attribution |
-|   |  |  label  |  *cwltool  `--`version*  |  R4-sw-version |
+|   |  |  label  |  `cwltool --version`  |  R4-sw-version |
 | **Entity**  |  wfprov:Artefact  |  wasGeneratedBy  |  wfprov:Processrun  |  R3-intermediate,  R7-identifier |
 |   |  |     ↳   role  |     wfdesc:OutputParameter  |  R1-parameters |
 | **Collection**  |  wfprov:Artefact  |  hadMember  |  wfprov:Artefact  |  R3-intermediate |
@@ -291,13 +317,11 @@ Practical Realisation of *CWLProv*
 
 It should be noted that we elected to implement *CWLProv* in the reference implementation *cwltool* instead of the more scalable and production-friendly CWL implementations like Toil (Vivian et al. [2017](#ref-vivian2017toil)), Arvados (“Arvados - Open Source Big Data Processing and Bioinformatics” [2018](#ref-arvados)), Rabix (Kaushik et al. [2017](#ref-kaushik_2017)), CWL-Airflow (Kotliar, Kartashov, and Barski [2018](#ref-cwlairflow2018)) or Cromwell (Voss, Auwera, and Gentry [2017](#ref-cromwell)). An updated list of implementations is available at the CWL homepage.[2] Compared to *cwltool* these generally have extensive scheduler and cloud compute support, and extensions for large data transfer and storage, and should therefore be considered for any adopters of the Common Workflow Language. In this study we have however focused on *cwltool* as its code base was found to be easy to adapt for rich provenance capture without having to modify subsystems for distributed execution or data management, and as a reference implementation better informing us on how to model *CWLProv* for the general case rather than being tied into execution details of the more sophisticated CWL workflow engines.
 
-*CWLProv* support for *cwltool* is built as an optional module which when invoked as *“cwltool `--`provenance ro/ workflow.cwl job.json”*, will automatically generate an RO with the given folder name *ro/* without requiring any additional information from the user. Each input file is assigned a hash value and placed in the folder *ro/data*, making it content-addressable to avoid local dependencies (Figure \[fig:processflow\]).
+*CWLProv* support for *cwltool* is built as an optional module which when invoked as `cwltool --provenance ro/ workflow.cwl job.json`, will automatically generate an RO with the given folder name `ro/` without requiring any additional information from the user. Each input file is assigned a hash value and placed in the folder `ro/data`, making it content-addressable to avoid local dependencies (Figure \[fig:processflow\]).
 
-\[t!\]
+In order to avoid including information about attribution without consent of the user, we introduce an additional flag `--enable-user-provenance`. If a user provides the options `--orcid` and `--full-name`, this information will be included in the provenance profile related to user attribution. Enabling `--enable-user-provenance` and not providing the full name or ORCID will store user account details from the local machine for attribution, i.e. the details of the *agent* that enacted the workflow.
 
-In order to avoid including information about attribution without consent of the user, we introduce an additional flag *“ `--`enable-user-provenance”*. If a user provides the options *`--`orcid* and *`--`full-name*, this information will be included in the provenance profile related to user attribution. Enabling *“ `--`enable-user-provenance”* and not providing the full name or ORCID will store user account details from the local machine for attribution, i.e. the details of the *agent* that enacted the workflow.
-
-The workflow and command line tool specifications are aggregated in one file to create an executable workflow and placed in folder *ro/workflow*. This folder also contains transformed input job objects containing the input parameters with references to artefacts in the *ro/data* based on relativising the paths present in the input object. These two files are sufficient to re-enact the workflow, provided the other required artefacts are also included in the RO and comply to the *CWLProv* format. The *cwltool* control flow (“Common-Workflow-Language/Cwltool:Common Workflow Language Reference Implementation” [2016](#ref-cwltool-controlflow)) indicates the points when the execution of the workflow and command line tools involved in the workflow enactment start, end and how the output is reported back. This information and the artefacts are captured and stored in the RO.
+The workflow and command line tool specifications are aggregated in one file to create an executable workflow and placed in folder `ro/workflow`. This folder also contains transformed input job objects containing the input parameters with references to artefacts in the `ro/data` based on relativising the paths present in the input object. These two files are sufficient to re-enact the workflow, provided the other required artefacts are also included in the RO and comply to the *CWLProv* format. The *cwltool* control flow (“Common-Workflow-Language/Cwltool:Common Workflow Language Reference Implementation” [2016](#ref-cwltool-controlflow)) indicates the points when the execution of the workflow and command line tools involved in the workflow enactment start, end and how the output is reported back. This information and the artefacts are captured and stored in the RO.
 
 When the execution of a workflow begins, *CWLProv* extensions to *cwltool* generate a provenance document (using the *prov* library) which includes default namespaces for the workflow enactment *“activity”*. The attribution details as an *agent* are also added at this stage if user provenance capture is enabled, e.g. to answer “who ran the workflow?”. Each step of the workflow can correspond to either a command line tool or another nested workflow referred to as a *sub-workflow* in the CWL documentation. For each nested workflow, a separate provenance profile is initialized recursively to achieve a *white-box* finer-grained provenance view as explained in Section ****. This profile is continually updated throughout the nested workflow enactment. Each step is identified by a unique identifier and recorded as an *activity* in the parent workflow provenance profile, i.e. the *“primary profile”*. The *nested* workflow is recorded as a step in the *primary profile* using the same identifier as the “nested workflow enactment activity” identifier in the respective provenance profile. For each step in the activity, the start time and association with the workflow activity is created and stored as part of the overall provenance to answer the question “when did it happen?”.
 
@@ -308,7 +332,7 @@ This prototype implementation provides a model and guidance for workflow platfor
 Achieving recommendations with provenance levels
 ------------------------------------------------
 
-Table \[tab:fulfilling\] map the best practices and recommendations from Table \[tab:recommendation:wide\] to the Levels of Provenance (Figure \[fig:levels\]). The shown methods and implementation readiness indicate to which extent the recommendations are addressed by the implementation of *CWLProv* (detailed in this section).
+The table below map the best practices and recommendations from Table \[tab:recommendation:wide\] to the Levels of Provenance (Figure above). The shown methods and implementation readiness indicate to which extent the recommendations are addressed by the implementation of *CWLProv* (detailed in this section).
 
 Note that other approaches may solve this mapping differently. For instance, Nextflow (Di Tommaso et al. [2017](#ref-ditommaso_2017)) may fulfill *R18-resource-use* at Provenance as it can produce trace reports with hardware resource usage per task execution (Centre for Genomic Regulation (CRG) [2018](#ref-nextflow_tracing)), but not for the overall workflow. While a Nextflow trace report is a separate CSV file with implementation-specific columns, our planned *R18-resource-use* approach for CWL is to combine *CWL-metrics* (Ohta, Tanjo, and Ogasawara [2018](#ref-tazro2018)), permalinks and the standard *GFD.204* (Cristofori et al. [2013](#ref-cristofori2013usage)) to further relate resource use with and provenance within the *CWLProv* Research Object.
 
@@ -323,39 +347,31 @@ It should be a goal of a scientific WMS to guide users towards achieving the req
 | R3-intermediate  |                |        •       |                |                | PROV, RO          |
 | R4-sw-version    |        •       |                |        •       |                | CWL, Docker, PROV |
 | R5-data-version  |        •       |                |                |        •       | CWL, BP           |
-| R6-annotation    |                |        •       |                | $\\coasterisk$ | CWL, RO, BP       |
+| R6-annotation    |                |        •       |                |        *       | CWL, RO, BP       |
 | R7-described     |                |        •       |                |                | CWL, RO           |
 | R7-identifier    |                |        •       |        •       |        •       | RO, CWLProv       |
-| R8-environment   |                | $\\coasterisk$ | $\\coasterisk$ |                | GFD.204           |
+| R8-environment   |                |        *       |        *       |                | GFD.204           |
 | R9-workflow      |        •       |        •       |        •       |                | CWL, wfdesc       |
 | R10-software     |        •       |                |        •       |                | CWL, Docker       |
 | R11-raw-data     |        •       |        •       |                |                | CWLProv, BP       |
 | R12-attribution  |                |        •       |                |                | RO, CWL, BP       |
 | R13-provenance   |                |        •       |        •       |                | PROV, RO          |
-| R14-diagram      |        ∘       |                |                | $\\coasterisk$ | CWL, RO           |
+| R14-diagram      |        ∘       |                |                |        *       | CWL, RO           |
 | R15-open-source  |        •       |                |                |                | CWL, BP           |
 | R16-format       |                |        •       |                |        •       | CWL, BP           |
 | R17-executable   |        ∘       |        •       |                |                | CWL, Docker       |
-| R18-resource-use |                | $\\coasterisk$ | $\\coasterisk$ |                | CWL, GFD.204      |
-| R19-example      | $\\coasterisk$ |        ∘       |                |                | RO, BP            |
+| R18-resource-use |                |        *       |        *       |                | CWL, GFD.204      |
+| R19-example      |        *       |        ∘       |                |                | RO, BP            |
 
-**CWL**: Common Workflow Language and embedded annotations
-
-**RO**: Research Object model and BagIt
-
-**PROV**: W3C Provenance model
-
-**CWLProv**: Additional attributes in PROV
-
-**wfdesc**: Prospective provenance in PROV
-
-**BP**: Best Practice need to be followed manually
-
-• Implemented
-
-∘ Partially implemented
-
-$\\coasterisk$ Implementation planned/ongoing
+* **CWL**: Common Workflow Language and embedded annotations
+* **RO**: Research Object model and BagIt
+* **PROV**: W3C Provenance model
+* **CWLProv**: Additional attributes in PROV
+* **wfdesc**: Prospective provenance in PROV
+* **BP**: Best Practice need to be followed manually
+* • Implemented
+* ∘ Partially implemented
+* \* Implementation planned/ongoing
 
 CWLProv Evaluation with Bioinformatics Workflows
 ================================================
@@ -367,7 +383,7 @@ To demonstrate the interoperability and portability of the proposed solution, we
 RNA-seq Analysis Workflow
 -------------------------
 
-\[t!\] <img src="images/rnaseq-cwlviewer-half.png" alt="image" />
+<img src="images/rnaseq-cwlviewer-half.png" alt="image" />
 
 RNA sequencing (RNA-seq) data generated by Next Generation Sequencing (NGS) platforms is comprised of short sequence reads that can be aligned to a reference genome, where the alignment results form the basis of various analyses such as quantitating transcript expression; identifying novel splice junctions and isoforms and differential gene expression (Dobin and Gingeras [2015](#ref-dobin2015mapping)). RNA-seq experiments can link phenotype to gene expression and are widely applied in multi-centric cancer studies (Cohen-Boulakia et al. [2017](#ref-cohen2017scientific)). Computational analysis of RNA-seq data is performed by different techniques depending on the research goals and the organism under study (Conesa et al. [2016](#ref-Conesa2016)). The workflow (“TopMed Rna-Seq Workflow” [2018](#ref-rnaseq)) included in this case study has been defined in CWL by one of the teams (“Heliumdatacommons” [2017](#ref-heliumda)) participating in NIH Data Commons initiative (“Data Commons | Nih Common Fund” [2018](#ref-DataComm86)), a large research infrastructure program aiming to make digital objects (such as data generated during biomedical research and software/tools required to utilize such data) shareable and accessible and hence aligned with the FAIR principles (Wilkinson et al. [2016](#ref-wilkinson_2016)).
 
@@ -380,7 +396,7 @@ Alignment Workflow
 
 Alignment is an essential step in variant discovery workflows and considered an obligatory *pre-processing* stage according to Best Practices by the Broad Institute (“GATK | Bp Doc \#11165 | Data Pre-Processing for Variant Discovery” [2018](#ref-GATKBP)). The purpose of this stage is to filter low-quality reads before variant calling or other interpretative steps (Xu [2018](#ref-xu2018review)). The workflow for alignment is designed to operate on raw sequence data to produce analysis-ready BAM files as the final output. The typical steps followed include file format conversions, aligning the read files to the reference genome sequence, and sorting the resulting files.
 
-\[b!\] <img src="images/new_alignment.png" alt="image" style="width:95.0%" />
+<img src="images/new_alignment.png" alt="image" style="width:95.0%" />
 
 The CWL alignment workflow (“Topmed-Workflows/Topmed-Alignment.cwl at Cwlprov\_testing · Farahzkhan/Topmed-Workflows”) included in this evaluation (Figure \[fig:align\]) is designed by Data Biosphere (“Data Biosphere” [2018](#ref-DataBios21)). It adapts the alignment pipeline (“Statgen/Docker-Alignment: Dockerfile for Alignment” [2017](#ref-docker-alignment)) originally developed at Abecasis Lab, The University of Michigan (“Abecasis Lab - Genome Analysis Wiki” [2017](#ref-Abecasis14)). This workflow is also part of NIH Data Commons initiative (as ) and comprises of four stages. First step, “Pre-align” accepts a Compressed Alignment Map (CRAM) file (a compressed format for BAM files developed by European Bioinformatics Institute (EBI) (Cochrane et al. [2012](#ref-Cochrane2012))) and human genome reference sequence as input and using underlying software utilities of SAMtools such as view, sort and fixmate returns a list of fastq files which can be used as input for the next step. The next step “Align” also accepts the human reference genome as input along with the output files from “Pre-align” and uses BWA-mem (Li [2013](#ref-li2013aligning)) to generate aligned reads as BAM files. SAMBLASTER (Faust and Hall [2014](#ref-samblaster)) is used to mark duplicate reads and SAMtools view to convert read files from SAM to BAM format. The BAM files generated after “Align” are sorted with “SAMtool sort”. Finally these sorted alignment files are merged to produce single sorted BAM file using SAMtools merge in “Post-align” step. The authors provide an example CRAM file, *Homo Sapien Assembly 38* reference genome along with its index files to be used as inputs for testing and analysis of the workflow.
 
@@ -391,7 +407,7 @@ Variant discovery analysis for high-throughput sequencing data is a widely used 
 
 The somatic variant calling workflow (Figure \[fig:somatic\]) included in this case study is designed by Blue Collar Bioinformatics (bcbio) (“Blue Collar Bioinformatics”), a community-driven initiative to develop best-practice pipelines for variant calling, RNA-seq and small RNA analysis workflows. According to the documentation, the goal of this project is to facilitate the automated analysis of high throughput data by making the resources *quantifiable*, *analyzable*, *scalable*, *accessible* and *reproducible*. All the underlying tools are containerized facilitating software use in the workflow. The somatic variant calling workflow defined in CWL is available on GitHub (“Somatic Variant Calling Workflow” [2018](#ref-bcbiowf)) and equipped with a well defined test dataset.
 
-\[t!\] <img src="images/2variantcalling.png" alt="image" height="453" />
+<img src="images/2variantcalling.png" alt="image" height="453" />
 
 Evaluation Activity
 -------------------
@@ -427,13 +443,14 @@ Evaluation Results
 
 The steps described above were taken to produce ROs which were then used to re-enact the workflows (outlined in Table \[tab:eval\]), without any further changes required. This demonstration illustrated the syntactic and semantic interoperability of the workflows across different systems. It shows that **both CWL executors were able to *exchange*, *comprehend* and *use* the information represented as *CWLProv* ROs**. The current implementation described in section **** does not resolve *Level 3*. Hence, the inclusion of domain-specific annotations referring to scientific context to address pragmatic interoperability is identified as crucial future direction and further detailed in section ****.
 
-<span>c c c</span> Enact-produce RO with & Re-enact using RO with & Status
-*cwltool* on MacOS & *toil-cwl-runner* on MacOS &
-& *cwltool* on Linux &
-& *toil-cwl-runner* on Linux &
-*cwltool* on Linux & *toil-cwl-runner* on Linux &
-& *cwltool* on MacOS &
-& *toil-cwl-runner* on MacOS &
+| Enact-produce RO with | Re-enact using RO with | Status |
+| --------------------- | ---------------------- | ------ |
+| *cwltool* on MacOS | *toil-cwl-runner* on MacOS | ☑ |
+| | *cwltool* on Linux | ☑ |
+| | *toil-cwl-runner* on Linux | ☑ |
+| *cwltool* on Linux | *toil-cwl-runner* on Linux | ☑ |
+| | *cwltool* on MacOS | ☑ |
+| | *toil-cwl-runner* on MacOS |☑ |
 
 ### *CWLProv* and Interoperability
 
@@ -465,12 +482,17 @@ An important point of *CWLProv* is to capture sufficient information at workflow
 
 ### Temporal and Spatial Overhead with Provenance
 
-<span>|L | c | c | c | c | c | c |</span> **Workflow** & &
-& & **toil-cwl-runner** & & **toil-cwl-runner**
-& With Prov & W/O Prov & W/O Prov & With Prov & W/O Prov & W/O Prov
-RNA-Seq Analysis Workflow & 4m30.289s & 4m0.139s & 3m46.817s & 3m33.306s & 3m41.166s & 3m30.406s
-Alignment Workflow& 28m23.792s & 24m12.404s & 15m3.539s & – & 162m35.111s & 146m27.592s
-Somatic Variant Calling Workflow & 21m25.868s & 19m27.519s & 7m10.470s & 17m26.722s & 17m0.227s & \*\*
+| Workflow | Linux | Linux | Linux | Mac OS | Mac OS | Mac OS |
+| --| ------- | ------- | -------------- | ------- | ------- | -------- |
+|   | `cwltool` | `cwltool` | `toil-wl-runner` | `cwltool` | `cwltool` | `toil-cwl-runner` |
+|   | *with Prov* | *w/o Prov* | *w/o Prov* | *with Prov* | *w/o Prov* | *w/o Prov* |
+| RNA-Seq Analysis Workflow | 4m30.289s | 4m0.139s | 3m46.817s | 3m33.306s | 3m41.166s | 3m30.406s |
+| Alignment Workflow| 28m23.792s | 24m12.404s | 15m3.539s | – | 162m35.111s | 146m27.592s |
+| Somatic Variant Calling Workflow | 21m25.868s | 19m27.519s | 7m10.470s | 17m26.722s | 17m0.227s | \*\* |
+
+* ** This could not be tested because of a [Docker mount issue](https://github.com/DataBiosphere/toil/issues/2680) on MacOS.
+* – This could not be tested because of the insucient hardware resources on the MacOS test machine, hence step I of the evaluation activity could not be performed for this workflow.
+
 
 Table \[tab:time\] shows the run-times for the three workflow enactments using cwltool and toil-cwl-runner on Linux and MacOS with and without enabling provenance capture as described in the evaluation activity section. These workflows were enacted at least once before this time calculation, hence the timing does not include the time for Docker images to be downloaded. On a new system, when re-running these workflows for the first time, the Docker images will be downloaded and may take significantly longer than the time specified here especially in case of the Somatic Variant Calling workflow because of the image size.
 
@@ -645,6 +667,9 @@ We would also like to thank the GigaScience editors and reviewers Tomoya Tanjo a
 We would like to thank the Common Workflow Language community, and in particular Peter Amstutz, Pau Ruiz Safont and Pjotr Prins, for their continuing support, review and feedback. We would also like to thank Brad Chapman, Christopher Ball and Lon Blauvelt for the workflows used in the evaluation and their prompt replies to our enquiries.
 
 We are grateful for partial travel support from Open Bioinformatics Foundation (OBF) Travel Fellowship Program (“OBF Travel Fellowship Program | Obf News” [2016](#ref-OBFTravel)) to Farah Zaib Khan for attending the Bioinformatics Open Source Conference (BOSC) 2017 and 2018 Codefests subsidizing this collaborative effort.
+
+References
+==========
 
 “Abecasis Lab - Genome Analysis Wiki.” 2017. <https://genome.sph.umich.edu/wiki/Abecasis_Lab>.
 
